@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Task Manager</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .todo-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 450px;
+        }
+        h2 { margin-top: 0; color: #333; }
+        .input-row { display: flex; gap: 10px; margin-bottom: 20px; }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { background-color: #218838; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            color: #444;
+        }
+        .delete-btn {
+            color: #dc3545;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .delete-btn:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="todo-card">
+        <h2>📝 Task Manager</h2>
+        
+        <!-- Input Form to Add Tasks -->
+        <form method="POST" class="input-row">
+            <input type="text" name="task" placeholder="Add a new task..." required autocomplete="off">
+            <button type="submit">Add</button>
+        </form>
+
+        <!-- Dynamic List Loop -->
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <span>{{ task }}</span>
+                    <!-- Pass the loop index number into our delete route URL -->
+                    <a href="{{ url_for('delete_task', task_index=loop.index0) }}" class="delete-btn">Remove</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
