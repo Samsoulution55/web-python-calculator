@@ -24,8 +24,15 @@
             <br><br>
             <button type="submit">Calculate</button>
         </form>
+        <!-- This placeholder renders the error banner if an issue happens -->
+        {% if error %}
+            <div class="result-box" style="background-color: #f8d7da; color: #721c24;">
+                {{ error }}
+            </div>
+        {% endif %}
 
-        {% if result != "" %}
+        <!-- This placeholder only renders if a successful calculation happened -->
+        {% if result != "" and not error %}
             <div class="result-box">
                 Result: {{ result }}
             </div>
