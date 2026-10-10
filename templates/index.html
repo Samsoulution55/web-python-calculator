@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Python Calculator</title>
-    <!-- This line links your python server data to your style sheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -24,17 +23,30 @@
             <br><br>
             <button type="submit">Calculate</button>
         </form>
-        <!-- This placeholder renders the error banner if an issue happens -->
+
         {% if error %}
             <div class="result-box" style="background-color: #f8d7da; color: #721c24;">
                 {{ error }}
             </div>
         {% endif %}
 
-        <!-- This placeholder only renders if a successful calculation happened -->
         {% if result != "" and not error %}
             <div class="result-box">
                 Result: {{ result }}
+            </div>
+        {% endif %}
+
+        <!-- NEW: Calculation History Section Layout -->
+        {% if history %}
+            <div style="margin-top: 25px; text-align: left; border-top: 1px solid #eee; padding-top: 15px;">
+                <h4 style="margin: 0 0 10px 0; color: #555;">Calculation History</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; max-height: 120px; overflow-y: auto;">
+                    {% for entry in history %}
+                        <li style="padding: 6px 0; border-bottom: 1px dashed #f0f0f0; color: #666; font-size: 14px;">
+                            ⏱️ {{ entry }}
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         {% endif %}
     </div>
